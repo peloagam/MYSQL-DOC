@@ -1,13 +1,13 @@
 # MYSQL-DOC 
 ## 技术文档
-* [the first day](linux简介.md)
-* [the second day](文件操作.md)
-* [the third day](基本命令.md)
-* [the fourth day](mysql安装.md)
-* [the fifth day](stu.md)
-* [the sixth day](安装.md)
-* [the seventh day](第七天.md)
-* [the eighth day](第八天.md)
+* [the first day，linux简介](the first day.md)
+* [the second day，文件操作](the second day.md)
+* [the third day，基本命令](the third day.md)
+* [the fourth day，mysql安装](the fourth day.md)
+* [the fifth day，stu](the fifth day.md)
+* [the sixth day,安装](the sixth day.md)
+* [the seventh day，第七天](the seventh day.md)
+* [the eighth day，第八天](the eighth day.md)
 
 
 ## 课程设计
