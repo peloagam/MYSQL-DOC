@@ -1,11 +1,11 @@
 # MYSQL-DOC 
 ## 技术文档
 * [the first day](linux简介.md)
-* [the second day](基本的文件操作.md)
-* [the third day](基本命令的使用.md)
+* [the second day](文件操作.md)
+* [the third day](基本命令.md)
 * [the fourth day](mysql安装.md)
 * [the fifth day](stu.md)
-* [the sixth day](CGI.md)
+* [the sixth day](安装.md)
 * [the seventh day](第七天.md)
 * [the eighth day](第八天.md)
 
