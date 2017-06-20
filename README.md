@@ -7,7 +7,7 @@
 * [the fifth day](stu.md)
 * [the sixth day](CGI.md)
 * [the seventh day](第七天.md)
-* [the eighth gay(第八天.md)
+* [the eighth day](第八天.md)
 
 
 ## 课程设计
