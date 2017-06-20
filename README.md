@@ -1,6 +1,6 @@
 # MYSQL-DOC 
 ## 技术文档
-* [the first day](linux简介.md)
+* [the first day](Linux简介.md)
 * [the second day，文件操作](the second day.md)
 * [the third day，基本命令](the third day.md)
 * [the fourth day，mysql安装](the fourth day.md)
