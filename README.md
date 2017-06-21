@@ -6,7 +6,7 @@
 * [the fourth day](mysql安装.md)
 * [the fifth day](stu.md)
 * [the sixth day](安装.md)
-* [the seventh day](head.html)
+* [the seventh day](第七天.md)
 * [the eighth day](第八天.md)
 
 
