@@ -75,7 +75,7 @@ int cgiMain()
 
 
 
-	strcpy(sql, "create table information(sno int(4) not null primary key auto_increment, sname char(20) not null,sex char(10) not null default 'M',sage int(4) not null,class int(4) not null)");
+	strcpy(sql, "create table information(sno int(4) not null primary key auto_increment, sname char(20) not null,sex char(10) not null default 'M',sage int(4) not null,class int(4) not null,dele int(4) not null default '1')");
 	if ((ret = mysql_real_query(db, sql, strlen(sql) + 1)) != 0)
 	{
 		if (ret != 1)
@@ -88,7 +88,7 @@ int cgiMain()
 
 
 
-	sprintf(sql, "insert into information values(%d, '%s','%s',%d,%d)",atoi(sno),sname,sex,atoi(sage),atoi(class));
+	sprintf(sql, "insert into information values(%d, '%s','%s',%d,%d,'1')",atoi(sno),sname,sex,atoi(sage),atoi(class));
 	if (mysql_real_query(db, sql, strlen(sql) + 1) != 0)
 	{
 		fprintf(cgiOut, "%s\n", mysql_error(db));

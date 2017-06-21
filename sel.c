@@ -36,11 +36,11 @@ int cgiMain()
 
 	if (sname[0] == '*')
 	{
-		sprintf(sql, "select * from information");
+		sprintf(sql, "select * from information where dele='1'");
 	}
 	else
 	{
-		sprintf(sql, "select * from information where sname = '%s'", sname);
+		sprintf(sql, "select * from information where sname = '%s' and dele='1'", sname);
 	}
 
 
