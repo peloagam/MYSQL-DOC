@@ -20,8 +20,8 @@
 * [2017.6.14](/planning/614.md)
 * [2017.6.15](/planning/615.md)
 * [2017.6.16](/planning/616.md)
-* [2017.6.17](/planning/617.md)
-* [2017.6.18](/planning/618.md)
 * [2017.6.19](/planning/619.md)
+* [2017.6.20](/planning/620.md)
+* [2017.6.21](/planning/621.md)
 
 
