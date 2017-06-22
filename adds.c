@@ -11,10 +11,8 @@ int cgiMain()
   FILE  * fd;
 	fprintf(cgiOut, "Content-type:text/html;charset=utf-8\n\n");
   char sno[32] = "\0";
-	char sname[32] = "\0";
-	char sex[16] = "\0";
-	char sage[16] = "\0";
-	char class[32] = "\0";
+	char cno[32] = "\0";
+	char score[32] = "\0";
 	int status = 0;
   char ch;
 
@@ -31,19 +29,13 @@ int cgiMain()
 	fclose(fd);
 
 
-	status = cgiFormString("sname",  sname, 32);
+	status = cgiFormString("cno",  cno, 32);
 	if (status != cgiFormSuccess)
 	{
-		fprintf(cgiOut, "get sname error!\n");
+		fprintf(cgiOut, "get cno error!\n");
 		return 1;
 	}
 
-	status = cgiFormString("sage",  sage, 16);
-	if (status != cgiFormSuccess)
-	{
-		fprintf(cgiOut, "get sage error!\n");
-		return 1;
-	}
 
 	status = cgiFormString("sno",  sno, 32);
 	if (status != cgiFormSuccess)
@@ -52,18 +44,12 @@ int cgiMain()
 		return 1;
 	}
 
-	status = cgiFormString("sex",  sex, 16);
-	if (status != cgiFormSuccess)
-	{
-		fprintf(cgiOut, "get sex error!\n");
-		return 1;
-	}
 
 
-	status = cgiFormString("class",  class, 32);
+	status = cgiFormString("score",  score, 32);
 	if (status != cgiFormSuccess)
 	{
-		fprintf(cgiOut, "get class error!\n");
+		fprintf(cgiOut, "get score error!\n");
 		return 1;
 	}
 	//fprintf(cgiOut, "name = %s, age = %s, stuId = %s\n", name, age, stuId);
@@ -91,7 +77,7 @@ int cgiMain()
 
 
 
-	strcpy(sql, "create table information(sno int(4) not null primary key auto_increment, sname char(20) not null,sex char(10) not null default 'M',sage int(4) not null,class int(4) not null,dele int(4) not null default '1')");
+	strcpy(sql, "create table score(sno int(4),cno int(4),score smallint,primary key(sno,cno),foreign key(sno) references information(sno),foreign key(cno) references course(cno)");
 	if ((ret = mysql_real_query(db, sql, strlen(sql) + 1)) != 0)
 	{
 		if (ret != 1)
@@ -104,7 +90,7 @@ int cgiMain()
 
 
 
-	sprintf(sql, "insert into information values(%d, '%s','%s',%d,%d,'1')",atoi(sno),sname,sex,atoi(sage),atoi(class));
+	sprintf(sql, "insert into score values(%d,%d, %d)",atoi(sno),atoi(cno),atoi(score));
 	if (mysql_real_query(db, sql, strlen(sql) + 1) != 0)
 	{
 		fprintf(cgiOut, "%s\n", mysql_error(db));
@@ -112,7 +98,7 @@ int cgiMain()
 		return -1;
 	}
 
-	fprintf(cgiOut, "add student ok!\n");
+	fprintf(cgiOut, "add score ok!\n");
 	mysql_close(db);
 	return 0;
 }

@@ -7,6 +7,7 @@
 
 char * headname = "head.html";
 char * footname = "footer.html";
+char * indexname= "index2.html";
 
 int cgiMain()
 {
@@ -23,20 +24,12 @@ int cgiMain()
 		</head>");
 
 	char sname[32] = "\0";
+  char sno[32] = "\0";
+  char class[32] = "\0";
 	int status = 0;
 	char ch;
 
-	if(!(fd = fopen(headname, "r"))){
-		fprintf(cgiOut, "Cannot open file, %s\n", headname);
-		return -1;
-	}
-	ch = fgetc(fd);
 
-	while(ch != EOF){
-		fprintf(cgiOut, "%c", ch);
-		ch = fgetc(fd);
-	}
-	fclose(fd);
 
 	status = cgiFormString("sname",  sname, 32);
 	if (status != cgiFormSuccess)
@@ -45,18 +38,26 @@ int cgiMain()
 		return 1;
 	}
 
+  status = cgiFormString("sno",  sno, 32);
+	if (status != cgiFormSuccess)
+	{
+		fprintf(cgiOut, "get sno error!\n");
+		return 1;
+	}
+
+  status = cgiFormString("class",  class, 32);
+  if (status != cgiFormSuccess)
+  {
+    fprintf(cgiOut, "get class error!\n");
+    return 1;
+  }
 	int ret;
 	MYSQL *db;
 	char sql[128] = "\0";
 
-	if (sname[0] == '*')
-	{
-		sprintf(sql, "select * from information where dele='1'");
-	}
-	else
-	{
-		sprintf(sql, "select * from information where sname = '%s' and dele='1'", sname);
-	}
+
+		sprintf(sql, "select * from information where sname = '%s' and  sno = %d and class = %d", sname,atoi(sno),atoi(class));
+
 
 
 	//初始化
@@ -91,41 +92,31 @@ int cgiMain()
 		fprintf(cgiOut,"mysql_store_result fail:%s\n", mysql_error(db));
 		return -1;
 	}
-
-	fprintf(cgiOut, "<div class=\"container\"> <h1 class=\"text-center\">查询结果</h1>");
-
-	fprintf(cgiOut,"<table class=\"table table-striped table-bordered\"><tr>");
-	int i = 0;
-
-	unsigned int fields;
-	fields = mysql_num_fields(res);
-
-	MYSQL_FIELD *mysql_filed;
-	mysql_filed = mysql_fetch_fields(res);
-	for (i = 0; i < fields ; i++)
-	{
-		fprintf(cgiOut, "<th>%s</th>", mysql_filed[i].name);
+  int num=(int)res->row_count;
+  if (num){
+    if(!(fd = fopen(indexname, "r"))){
+		fprintf(cgiOut, "Cannot open file, %s\n", indexname);
+		return -1;
 	}
-	fprintf(cgiOut,"</tr>");
+	ch = fgetc(fd);
 
-	//访问每一条记录的值
-	MYSQL_ROW  row;
-	unsigned long  *len;
-
-	while ((row = mysql_fetch_row(res)) != NULL)
-	{
-		fprintf(cgiOut,"<tr>");
-		len = mysql_fetch_lengths(res);
-		for (i = 0; i < fields ; i++)
-		{
-			fprintf(cgiOut,"<td>%.*s</td>", (int)len[i], row[i]);
-		}
-		fprintf(cgiOut,"</tr>");
+	while(ch != EOF){
+		fprintf(cgiOut, "%c", ch);
+		ch = fgetc(fd);
 	}
-	fprintf(cgiOut,"</table></div>");
+}else{
+  if(!(fd = fopen(headname, "r"))){
+  fprintf(cgiOut, "Cannot open file, %s\n", headname);
+  return -1;
+}
+ch = fgetc(fd);
 
-
-
+while(ch != EOF){
+  fprintf(cgiOut, "%c", ch);
+  ch = fgetc(fd);
+}
+fprintf(cgiOut,"This student is not exit!");
+}
 	mysql_close(db);
 	return 0;
 }

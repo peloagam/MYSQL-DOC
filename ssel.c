@@ -22,7 +22,8 @@ int cgiMain()
 		    <link rel=\"stylesheet\" href=\"/stu/public/css/bootstrap.min.css\">\
 		</head>");
 
-	char sname[32] = "\0";
+	char sno[32] = "\0";
+  char cno[32] = "\0";
 	int status = 0;
 	char ch;
 
@@ -38,10 +39,16 @@ int cgiMain()
 	}
 	fclose(fd);
 
-	status = cgiFormString("sname",  sname, 32);
+	status = cgiFormString("sno",  sno, 32);
 	if (status != cgiFormSuccess)
 	{
-		fprintf(cgiOut, "get sname error!\n");
+		fprintf(cgiOut, "get sno error!\n");
+		return 1;
+	}
+  status = cgiFormString("cno",  cno, 32);
+	if (status != cgiFormSuccess)
+	{
+		fprintf(cgiOut, "get cno error!\n");
 		return 1;
 	}
 
@@ -49,15 +56,7 @@ int cgiMain()
 	MYSQL *db;
 	char sql[128] = "\0";
 
-	if (sname[0] == '*')
-	{
-		sprintf(sql, "select * from information where dele='1'");
-	}
-	else
-	{
-		sprintf(sql, "select * from information where sname = '%s' and dele='1'", sname);
-	}
-
+		sprintf(sql, "select * from score where sno= %d and cno= %d",atoi(sno),atoi(cno));
 
 	//初始化
 	db = mysql_init(NULL);
